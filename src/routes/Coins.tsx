@@ -64,20 +64,6 @@ const Img = styled.img`
 `;
 
 function Coins() {
-  //react query로 인해 이 여러줄은 api.tsx의 한줄로 대체된다.
-  /* const [coins, setCoins] = useState<CoinInterface[]>([]);
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    (async () => {
-      const respones = await fetch("https://api.coinpaprika.com/v1/coins");
-      const json = await respones.json();
-      //console.log(json);
-      setCoins(json.slice(0, 100));
-      setLoading(false);
-    })();
-  }, []);
-  //console.log(coins); */
-
   const { isLoading, data } = useQuery<ICoin[]>(["allCoins"], fetchCoins);
 
   return (
