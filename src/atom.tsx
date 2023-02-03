@@ -1,12 +1,14 @@
 import { atom, selector } from "recoil";
 
+type categories = "TODO" | "DOING" | "DONE";
+
 export interface IToDo {
   text: string;
   id: number;
-  category: "TODO" | "DOING" | "DONE";
+  category: categories;
 }
 
-export const categoryState = atom({
+export const categoryState = atom<categories>({
   key: "category",
   default: "TODO",
 });
@@ -21,13 +23,6 @@ export const toDoSelector = selector({
   get: ({ get }) => {
     const toDos = get(toDoState);
     const category = get(categoryState);
-    //좋지 않은 방법, 하나하나 체크할 필요가 없다.
-    /* if (category === "TODO")
-      return toDos.filter((toDo) => toDo.category === "TODO");
-    if (category === "DOING")
-      return toDos.filter((toDo) => toDo.category === "DOING");
-    if (category === "DONE")
-      return toDos.filter((toDo) => toDo.category === "DONE"); */
     return toDos.filter((toDo) => toDo.category === category);
   },
 });
