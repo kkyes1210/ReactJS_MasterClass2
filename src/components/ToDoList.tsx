@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { categoryState, toDoSelector, toDoState } from "../atom";
+import { Categories, categoryState, toDoSelector, toDoState } from "../atom";
 import CreateToDo from "./CreateToDo";
 import ToDo from "./ToDo";
 
@@ -18,9 +18,9 @@ function ToDoList() {
       <h1>ToDos</h1>
       <hr />
       <select value={category} onInput={onInput}>
-        <option value="TODO">To Do</option>
-        <option value="DOING">Doing</option>
-        <option value="DONE">Done</option>
+        <option value={Categories.TODO}>To Do</option>
+        <option value={Categories.DOING}>Doing</option>
+        <option value={Categories.DONE}>Done</option>
       </select>
       <CreateToDo />
       {toDos?.map((toDo) => (

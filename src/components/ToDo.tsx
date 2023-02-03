@@ -1,13 +1,5 @@
 import { useSetRecoilState } from "recoil";
-import { IToDo, toDoState } from "../atom";
-
-//const food = ["pizza", "mango", "kimchi", "kimbab"];
-// mango를 apple로 교체해보기
-// 1. mango index 구하기
-// 2. 배열을 두 부분으로 나누기
-//const front = ["pizza"];
-//const back = ["kimchi", "kimbab"];
-//const finalPart = [...front, "apple", ...back];
+import { Categories, IToDo, toDoState } from "../atom";
 
 function ToDo({ text, category, id }: IToDo) {
   const setToDos = useSetRecoilState(toDoState);
@@ -29,18 +21,18 @@ function ToDo({ text, category, id }: IToDo) {
   return (
     <li>
       <span>{text}</span>
-      {category !== "DOING" && (
-        <button name="DOING" onClick={onClick}>
+      {category !== Categories.DOING && (
+        <button name={Categories.DOING} onClick={onClick}>
           Doing
         </button>
       )}
-      {category !== "TODO" && (
-        <button name="TODO" onClick={onClick}>
+      {category !== Categories.TODO && (
+        <button name={Categories.TODO} onClick={onClick}>
           To Do
         </button>
       )}
-      {category !== "DONE" && (
-        <button name="DONE" onClick={onClick}>
+      {category !== Categories.DONE && (
+        <button name={Categories.DONE} onClick={onClick}>
           Done
         </button>
       )}
