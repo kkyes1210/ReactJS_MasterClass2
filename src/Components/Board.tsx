@@ -2,7 +2,8 @@ import { Droppable } from "@hello-pangea/dnd";
 import styled from "styled-components";
 import DragabbleCard from "./DragabbleCard";
 import { useForm } from "react-hook-form";
-import { ITodo } from "../atoms";
+import { ITodo, toDoState } from "../atoms";
+import { useSetRecoilState } from "recoil";
 
 const Wrapper = styled.div`
   width: 300px;
@@ -56,10 +57,18 @@ const Form = styled.form`
 `;
 
 function Board({ toDos, boardId }: IBoardProps) {
+  const setToDos = useSetRecoilState(toDoState);
   const { register, setValue, handleSubmit } = useForm<IForm>();
-  const onValid = (toDo: IForm) => {
+  const onValid = ({ toDo }: IForm) => {
     //console.log(toDo);
+    const newToDo = {
+      id: Date.now(),
+      text: toDo,
+    };
     setValue("toDo", "");
+    setToDos((allBoard) => {
+      return { ...allBoard, [boardId]: [...allBoard[boardId], newToDo] };
+    });
   };
   return (
     <Wrapper>
